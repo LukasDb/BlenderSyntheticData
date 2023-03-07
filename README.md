@@ -42,6 +42,7 @@ blender/
 
 ## Setup
 - Provide background images in the folder 'backgrounds'
+- Download blender scene and custom models and kpts from [here] (https://drive.google.com/drive/folders/1RodFYe8YxojwDZ3UIDka-FkL9Sw9AiSq?usp=sharing)
 - Download LineMod Models and pastte ply files into lm_obj_mesh
 - Download ugreal_fg_objects and paste into ugreal_obj_mesh
 - Download YCB models and paste 00*_** folders into ycb_obj_mesh
