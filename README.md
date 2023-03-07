@@ -8,7 +8,8 @@ The following data is generated (only for objects included in the ID_dict):
 - Camera Intrinsic Matrix
 - Stereo Camera Baseline
 
-Data Structure:
+File Structure:
+```
 blender/
 ├── <dataset_name>/
 │   ├── 01/
@@ -33,9 +34,7 @@ blender/
 │   ├── 02/
 │   ├── 03/
 │   └── ...
-
-
-validateDataset.py provides a showcase how to read and visualize the data.
+```
 
 ## Requirements
 - Blender 3.3
@@ -77,6 +76,8 @@ optional arguments:
 	- save default material parameters to params within Blender scripting
 
 ## View Dataset
+```
 usage: viewDataset.py PARAM_FILE
 
 Visualization of RGB images with pose annotations. Use the same params file as in data generation
+```
