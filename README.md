@@ -27,22 +27,30 @@ blender/
 |	|	|	├── ...
 |	|	├── rgb/
 |	|	|	├── rgb_0000.png 			-> RGB Image
-|	|	|	├── rgb_0001.png
+|	|	|	├── [rgb_0000_R.png] 	(if stereo mode)
 |	|	|	├── ...
 |	|	├── gt.json 					-> Intrinsic Matrix, Stereo Baseline
-|	|	└── params.json					-> Backup of Generation Parameters
+|	|	└── params.json		  	-> Backup of Generation Parameters
 │   ├── 02/
 │   ├── 03/
 │   └── ...
 ```
 
 ## Requirements
-- Blender 3.3
-- Python
+### Blender:
+- Download Blender 3.3 LTS [here](https://www.blender.org/download/lts/3-3/). Do not install from apt or snap, 3.3 is required
+- Install Scipy for built-in Python of Blender:
+  - Navigate to your Blender 3.3 directory and run :
+    ```
+    cd 3.3/python/bin/
+    ./python3.10 -m ensurepip
+    ./python3.10 -m pip install scipy
+    ```
+- Run Blender and open the base scene `scene_linemod.blend`. On Opening, allow the exectution of scripts permanently.
 
 ## Setup
 - Provide background images in the folder 'backgrounds'
-- Download blender scene and custom models and kpts from [here](https://drive.google.com/drive/folders/1RodFYe8YxojwDZ3UIDka-FkL9Sw9AiSq?usp=sharing)
+- Download Blender scene and custom models and kpts from [here](https://drive.google.com/drive/folders/1RodFYe8YxojwDZ3UIDka-FkL9Sw9AiSq?usp=sharing)
 - Download LineMod Models and pastte ply files into lm_obj_mesh
 - Download ugreal_fg_objects and paste into ugreal_obj_mesh
 - Download YCB models and paste 00*_** folders into ycb_obj_mesh
@@ -52,7 +60,7 @@ blender/
 ## Usage
 The dataset generation can be launched in two ways:
 (1) From within Blender using the GUI provided by the Randomizer Plugin (only singlethreaded, prone to crashing, use for testing)
-(2) From launch_data_generation.py (supports multiprocessing, multi-GPU)
+(2) From launch_data_generation.py (supports multiprocessing, multi-GPU). Make sure to install `begins` for your Python Distribution that is used to launch the script (different to the built-in Python)
 ```
 usage: launch_data_generation.py [-h] [--gpus GPUS] [--n-workers N_WORKERS] PARAM_FILE
 
@@ -67,6 +75,10 @@ optional arguments:
   --n-workers N_WORKERS, -n Number of Workers per GPU
                         (default: 5)
 ```
+
+## Caveats
+- During setup, the script looks for GPUs that include 'nvidia' and 'optix' in their name. Make sure your GPU(s) can be found in Blender. In Blender's GUI: Edit->Preferences in the 'System' Tab, activate Optix Rendering device and check your device names. You can modify device detection in 'Scripting', choose the 'setup' script and make your changes at the bottom of the script.
+- Too many background images seem to slow down rendering. However, too little background images and you will loose variety of lighting conditions.
 
 ## Extension and Customization
 - Edit Randomizing script and settings from within Blender
